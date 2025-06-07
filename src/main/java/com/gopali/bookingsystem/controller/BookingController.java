@@ -19,13 +19,13 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
-    @PostMapping("/post")
+    @PostMapping("")
     public ResponseEntity<Boolean> saveBooking(@RequestBody Booking booking) {
         boolean result = bookingService.addBooking(booking);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/get")
+    @GetMapping("")
     public List<Booking> getBookings() {
         return bookingService.getBookings();
     }
