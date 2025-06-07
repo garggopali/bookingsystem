@@ -1,4 +1,5 @@
 package com.gopali.bookingsystem.model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
 /**
  * @author Gopali
  * @version 1.0
@@ -20,29 +20,29 @@ import jakarta.persistence.Table;
  */
 
 @Entity
-@Table(name="booking")
-public class Booking{
+@Table(name = "booking")
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column
     private String customerName;
-    
+
     @Column
     private LocalDate date;
-    
+
     @Column
     private LocalTime startTime;
-    
+
     @Column
     private LocalTime endTime;
-    
-    @Column(nullable = false)
+
+    @Column(nullable = true)
     private Long coworkerId; // null in step 1, used from step 3
 
-    Booking(){
+    Booking() {
     }
 
     public Long getId() {
@@ -69,7 +69,7 @@ public class Booking{
         this.date = date;
     }
 
-     public LocalTime getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
@@ -77,7 +77,7 @@ public class Booking{
         this.startTime = startTime;
     }
 
-     public LocalTime getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
