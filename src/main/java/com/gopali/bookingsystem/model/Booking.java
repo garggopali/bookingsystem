@@ -45,6 +45,13 @@ public class Booking {
     Booking() {
     }
 
+    Booking(String customerName, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        this.customerName = customerName;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public Long getId() {
         return id;
     }

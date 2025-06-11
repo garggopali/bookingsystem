@@ -8,18 +8,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="availityslot")
+@Table(name = "availityslot")
 public class AvailitySlot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
-    Long coworkerId;
+    @ManyToOne
+@JoinColumn(name = "coworker_id", nullable = false)
+private Coworker coworker;
+
+   // @Column(nullable = false)
+    //Long coworkerId;
 
     @Column(nullable = false)
     LocalDate date;
@@ -30,7 +36,14 @@ public class AvailitySlot {
     @Column(nullable = false)
     LocalTime endTime;
 
-     AvailitySlot() {
+    AvailitySlot() {
+    }
+
+    AvailitySlot(Long coworkerId, LocalDate date, LocalTime startTime, LocalTime endTime) {
+       // this.coworkerId = coworkerId;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Long getId() {
@@ -39,14 +52,6 @@ public class AvailitySlot {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCoworkerId() {
-        return coworkerId;
-    }
-
-    public void setCoworkerId(Long coworkerId) {
-        this.coworkerId = coworkerId;
     }
 
     public LocalDate getDate() {
@@ -73,5 +78,11 @@ public class AvailitySlot {
         this.endTime = endTime;
     }
 
-    
+    public Coworker getCoworker() {
+        return coworker;
+    }
+
+    public void setCoworker(Coworker coworker) {
+        this.coworker = coworker;
+    }
 }
