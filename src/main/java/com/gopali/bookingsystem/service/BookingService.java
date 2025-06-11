@@ -1,9 +1,7 @@
 package com.gopali.bookingsystem.service;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,19 +84,16 @@ public class BookingService {
         }
     }
 
- public List<Booking> getBookings(LocalDate date, Long coworkerId) {
-    if (date != null && coworkerId != null) {
-        return bookingRepo.findByCoworkerIdAndDate(coworkerId, date);
-    } else if (date != null) {
-        return bookingRepo.findByDate(date);
-    } else if (coworkerId != null) {
-        return bookingRepo.findByCoworkerId(coworkerId);
-    } else {
-        return bookingRepo.findAll();
+    public List<Booking> getBookings(LocalDate date, Long coworkerId) {
+        if (date != null && coworkerId != null) {
+            return bookingRepo.findByCoworkerIdAndDate(coworkerId, date);
+        } else if (date != null) {
+            return bookingRepo.findByDate(date);
+        } else if (coworkerId != null) {
+            return bookingRepo.findByCoworkerId(coworkerId);
+        } else {
+            return bookingRepo.findAll();
+        }
     }
-}
 
-    // 1. add db connfig
-    // 2. java profiling
-    // getting the booking
 }

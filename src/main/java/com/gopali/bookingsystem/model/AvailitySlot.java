@@ -21,11 +21,8 @@ public class AvailitySlot {
     Long id;
 
     @ManyToOne
-@JoinColumn(name = "coworker_id", nullable = false)
-private Coworker coworker;
-
-   // @Column(nullable = false)
-    //Long coworkerId;
+    @JoinColumn(name = "coworker_id", nullable = false)
+    private Coworker coworker;
 
     @Column(nullable = false)
     LocalDate date;
@@ -40,7 +37,7 @@ private Coworker coworker;
     }
 
     AvailitySlot(Long coworkerId, LocalDate date, LocalTime startTime, LocalTime endTime) {
-       // this.coworkerId = coworkerId;
+        // this.coworkerId = coworkerId;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;

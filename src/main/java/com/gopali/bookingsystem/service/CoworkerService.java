@@ -31,15 +31,6 @@ public class CoworkerService {
         return coworkerRepo.findAll();
     }
 
-    // public boolean addCoworkerAvailabilty(Long coworkerId, AvailitySlot
-    // availitySlot) {
-    // if (availitySlot == null)
-    // return false;
-    // availitySlotRepo.save(availitySlot);
-    // return true;
-    // }
-    // }
-
     public boolean addCoworkerAvailabilty(Long coworkerId, AvailitySlot availitySlot) {
         Coworker coworker = coworkerRepo.findById(coworkerId)
                 .orElseThrow(() -> new IllegalArgumentException("Coworker not found"));

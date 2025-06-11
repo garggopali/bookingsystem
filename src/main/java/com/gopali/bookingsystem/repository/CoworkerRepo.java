@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.gopali.bookingsystem.model.Coworker;
 
 @Repository
-public interface CoworkerRepo extends JpaRepository<Coworker, Long>{
-    
+public interface CoworkerRepo extends JpaRepository<Coworker, Long> {
+
 }
