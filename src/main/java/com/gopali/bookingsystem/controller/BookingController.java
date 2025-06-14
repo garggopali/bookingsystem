@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,14 +27,18 @@ public class BookingController {
     EmailNotifier emailNotifier;
 
     @PostMapping("")
-    public ResponseEntity<Boolean> saveBooking(@RequestBody Booking booking) {
-        boolean result = bookingService.addBooking(booking);
+    public ResponseEntity<Booking> saveBooking(
+            @RequestBody Booking booking) {
 
-        // After booking will get email notification
-        // Trigger external email
-        emailNotifier.sendEmail(booking.getEmail(), "Booking Confirmed", "Thanks for booking!");
+        Booking savedBooking = bookingService.addBooking(booking);
 
-        return ResponseEntity.ok(result);
+        // Only send email if booking was newly created
+        emailNotifier.sendEmail(
+                savedBooking.getEmail(),
+                "Booking Confirmed",
+                "Thanks for booking!");
+
+        return ResponseEntity.ok(savedBooking);
     }
 
     @GetMapping("")

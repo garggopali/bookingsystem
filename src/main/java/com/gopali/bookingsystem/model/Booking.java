@@ -3,8 +3,6 @@ package com.gopali.bookingsystem.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.annotation.processing.Generated;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +22,11 @@ import jakarta.persistence.Table;
 public class Booking {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false, unique = true)
+    private String idempotencyKey; // ensures idempotancy
 
     @Column(nullable = false)
     private String customerName;
@@ -43,7 +44,7 @@ public class Booking {
     private Long coworkerId; // null in step 1, used from step 3
 
     @Column(nullable = true)
-    private String email; 
+    private String email;
 
     Booking() {
     }
@@ -55,12 +56,20 @@ public class Booking {
         this.endTime = endTime;
     }
 
-    public Long getId() {
-        return id;
+     public Long getId() {
+     return id;
+     }
+
+     public void setId(Long id) {
+     this.id = id;
+     }
+
+    public String getIdempotencyKey() {
+        return idempotencyKey;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdempotencyKey(String idempotencyKey) {
+        this.idempotencyKey = idempotencyKey;
     }
 
     public String getCustomerName() {
@@ -103,7 +112,7 @@ public class Booking {
         this.coworkerId = coworkerId;
     }
 
-     public String getEmail() {
+    public String getEmail() {
         return email;
     }
 

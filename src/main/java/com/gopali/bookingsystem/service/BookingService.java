@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -27,7 +28,7 @@ public class BookingService {
     @Autowired
     private AvailitySlotRepo availitySlotRepo;
 
-    public boolean addBooking(Booking booking) {
+    public Booking addBooking(Booking booking) {
 
         // 1. Basic field validations
 
@@ -43,6 +44,8 @@ public class BookingService {
             throw new IllegalArgumentException("Booking end time is missing");
         else if (!booking.getStartTime().isBefore(booking.getEndTime()))
             throw new IllegalArgumentException("Start time should be after end time");
+        else if (!StringUtils.hasText(booking.getIdempotencyKey()))
+            throw new IllegalArgumentException("Idempotency key is missing");
 
         // 2. Coworker existence check
 
@@ -77,10 +80,16 @@ public class BookingService {
                 throw new IllegalArgumentException("Booking time overlaps with an existing booking");
             }
 
-            // 5. Save booking
+            // Idempotency: check if a booking with the same key already exists then save
+            String key = booking.getIdempotencyKey();
 
-            bookingRepo.save(booking);
-            return true;
+            if (key == null || key.trim().isEmpty()) {
+                return bookingRepo.save(booking);
+            } else {
+                return bookingRepo.findByIdempotencyKey(key)
+                        .orElseGet(() -> bookingRepo.save(booking));
+            }
+
         }
     }
 
