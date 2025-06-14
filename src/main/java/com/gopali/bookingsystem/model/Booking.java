@@ -42,6 +42,9 @@ public class Booking {
     @Column(nullable = true)
     private Long coworkerId; // null in step 1, used from step 3
 
+    @Column(nullable = true)
+    private String email; 
+
     Booking() {
     }
 
@@ -98,6 +101,14 @@ public class Booking {
 
     public void setCoworkerId(Long coworkerId) {
         this.coworkerId = coworkerId;
+    }
+
+     public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

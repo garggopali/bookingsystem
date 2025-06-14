@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gopali.bookingsystem.component.EmailNotifier;
 import com.gopali.bookingsystem.model.Booking;
 import com.gopali.bookingsystem.service.BookingService;
 
@@ -21,9 +22,17 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
+    @Autowired
+    EmailNotifier emailNotifier;
+
     @PostMapping("")
     public ResponseEntity<Boolean> saveBooking(@RequestBody Booking booking) {
         boolean result = bookingService.addBooking(booking);
+
+        // After booking will get email notification
+        // Trigger external email
+        emailNotifier.sendEmail(booking.getEmail(), "Booking Confirmed", "Thanks for booking!");
+
         return ResponseEntity.ok(result);
     }
 
