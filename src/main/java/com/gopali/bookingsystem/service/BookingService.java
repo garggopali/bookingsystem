@@ -50,9 +50,9 @@ public class BookingService {
         // 2. Coworker existence check
 
         Long coworkerId = booking.getCoworkerId();
-        if (coworkerId == null)
-            throw new IllegalArgumentException("Coworker id should not be null");
-        else {
+        String key = booking.getIdempotencyKey();
+        
+        if (key == null || key.trim().isEmpty()) {
             Coworker coworker = coworkerRepo.findById(coworkerId)
                     .orElseThrow(() -> new IllegalArgumentException("Coworker is not found"));
 
@@ -81,14 +81,11 @@ public class BookingService {
             }
 
             // Idempotency: check if a booking with the same key already exists then save
-            String key = booking.getIdempotencyKey();
-
-            if (key == null || key.trim().isEmpty()) {
-                return bookingRepo.save(booking);
-            } else {
-                return bookingRepo.findByIdempotencyKey(key)
-                        .orElseGet(() -> bookingRepo.save(booking));
-            }
+            // String key = booking.getIdempotencyKey();
+            return bookingRepo.save(booking);
+        } else {
+            return bookingRepo.findByIdempotencyKey(key)
+                    .orElseGet(() -> bookingRepo.save(booking));
 
         }
     }
