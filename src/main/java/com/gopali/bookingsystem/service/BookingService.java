@@ -28,6 +28,7 @@ public class BookingService {
     @Autowired
     private AvailitySlotRepo availitySlotRepo;
 
+    
     public Booking addBooking(Booking booking) {
 
         // 1. Basic field validations
@@ -51,7 +52,7 @@ public class BookingService {
 
         Long coworkerId = booking.getCoworkerId();
         String key = booking.getIdempotencyKey();
-        
+
         if (key == null || key.trim().isEmpty()) {
             Coworker coworker = coworkerRepo.findById(coworkerId)
                     .orElseThrow(() -> new IllegalArgumentException("Coworker is not found"));

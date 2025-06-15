@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +27,13 @@ public class BookingController {
     EmailNotifier emailNotifier;
 
     @PostMapping("")
+    //@PreAuthorize("hasRole'USER") //Auth logic
     public ResponseEntity<Booking> saveBooking(
             @RequestBody Booking booking) {
 
         Booking savedBooking = bookingService.addBooking(booking);
 
-        // Only send email if booking was newly created
+        // Only send email if booking was newly created // Email notification
         emailNotifier.sendEmail(
                 savedBooking.getEmail(),
                 "Booking Confirmed",
