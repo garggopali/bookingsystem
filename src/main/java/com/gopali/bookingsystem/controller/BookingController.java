@@ -25,9 +25,9 @@ public class BookingController {
 
     @Autowired
     EmailNotifier emailNotifier;
-
+    
+ // @PreAuthorize("hasRole'USER") //Auth logic
     @PostMapping("")
-    //@PreAuthorize("hasRole'USER") //Auth logic
     public ResponseEntity<Booking> saveBooking(
             @RequestBody Booking booking) {
 
