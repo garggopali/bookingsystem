@@ -21,7 +21,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 //.requestMatchers("/bookings").authenticated()
                 .requestMatchers(HttpMethod.POST, "/bookings").authenticated() // if security is only on POST
-                .anyRequest().permitAll()
+                .anyRequest().permitAll() //// Everything else is public
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
