@@ -1,9 +1,7 @@
-The project is a Java-based Booking System implemented using Spring Boot. It includes RESTful controllers, models for booking and coworking entities, database integration (via H2), and email notifications.
-
-**Here’s a draft README.md for my project:**
+The project is a Java-based Booking System implemented using Spring Boot. It includes RESTful controllers, models for booking and coworking entities, H2 memory database with memory and/or file(based on active profile), and email notifications.
 
 **Booking System**
-A simple coworking space booking system built with Spring Boot. It allows users to manage coworking availability, schedule bookings, and send notifications.
+A simple coworking slot booking system built with Spring Boot/Gradle offering various endpoints as API cataglogue. It allows users to manage coworking availability, schedule bookings, and send notifications.
 
 **Features**
 REST APIs to:
