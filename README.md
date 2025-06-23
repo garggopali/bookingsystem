@@ -13,14 +13,23 @@ Email notification component
 Modular architecture with MVC pattern
 
 bookingsystem-main/
+
 ├── src/main/java/com/gopali/bookingsystem/
+
 │   ├── controller/
+
 │   ├── model/
+
 │   ├── repository/
+
 │   ├── component/
+
 │   └── BookingsystemApplication.java
+
 ├── h2/
+
 ├── build.gradle
+
 ├── settings.gradle
 
 **Prerequisites**
