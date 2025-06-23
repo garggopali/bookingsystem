@@ -12,16 +12,15 @@ In-memory H2 database integration
 Email notification component
 Modular architecture with MVC pattern
 
-**Project Structure**
 bookingsystem-main/
 ├── src/main/java/com/gopali/bookingsystem/
-│   ├── controller/          # REST API controllers
-│   ├── model/               # Entity models
-│   ├── repository/          # Spring Data JPA repositories
-│   ├── component/           # Utility components (e.g., email)
-│   └── BookingsystemApplication.java  # Main app entry point
-├── h2/                      # Embedded H2 database files
-├── build.gradle             # Gradle build file
+│   ├── controller/
+│   ├── model/
+│   ├── repository/
+│   ├── component/
+│   └── BookingsystemApplication.java
+├── h2/
+├── build.gradle
 ├── settings.gradle
 
 **Prerequisites**
