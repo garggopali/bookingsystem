@@ -38,22 +38,17 @@ Once started, the app will be available at http://localhost:8080.
 Method	Endpoint	Description
 POST	/api/coworker	Add a new coworker
 GET	/api/coworker	List all coworkers
-POST	/api/slot	Add availability slot
-GET	/api/slot	List all availability slots
-POST	/api/booking	Book a slot
-GET	/api/booking	List all bookings
+GET	/api/coworker/{id}/availability	Get availability of a specific coworker
+POST	/api/coworker/{id}/availability	add availability of a specific coworker
+POST	/api/bookings	Book a slot
+GET	/api/bookings	List all bookings
 
 **Database**
 The app uses an H2 embedded database. Data is stored in:
 
-h2/bookingdb.mv.db
-You can view the H2 console at:
-
-http://localhost:8080/h2-console
 JDBC URL: jdbc:h2:file:./h2/bookingdb
-
-User: sa
-Password: (leave blank)
+Username: gopali
+Password: gopali
 
 **Email Notifications**
 EmailNotifier.java is a component stubbed to handle notification sending when bookings are created to integrate with real email services (e.g., JavaMailSender).
